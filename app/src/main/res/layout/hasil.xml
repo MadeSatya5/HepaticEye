@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:gravity="center"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="HepaticEye"
+                android:textColor="@color/white"
+                android:textSize="28dp"
+                android:fontFamily="@font/tango"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Halo, User"
+                android:textColor="@color/white"
+                android:fontFamily="@font/utendo"
+                android:textSize="20dp"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:layout_width="43dp"
+                android:layout_height="36dp"
+                android:src="@drawable/baseline_person_24_white"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="400dp"
+            android:layout_marginTop="40dp"
+            android:background="@color/white"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hasil :"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/tango"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/persentase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="15%"
+            android:fontFamily="@font/tango"
+            android:textColor="@color/yellow"
+            android:textSize="70dp"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/hasil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kemungkinan gejala mata Hepatitis"
+            android:fontFamily="@font/utendo"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -7,32 +7,105 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        android:padding="15dp"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="HepaticEye"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="28dp"
+                android:fontFamily="@font/tango"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Halo, User"
+                android:textColor="@color/black"
+                android:fontFamily="@font/utendo"
+                android:textSize="20dp"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:layout_width="43dp"
+                android:layout_height="36dp"
+                android:src="@drawable/baseline_person_24" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="15dp">
 
-        <ImageView
-            android:layout_width="192dp"
-            android:layout_height="161dp"
-            android:src="@drawable/baseline_center_focus_weak_24" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Pantau"
+            android:textColor="@color/black"
+            android:fontFamily="@font/tango"
+            android:textSize="44dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="HATI"
+            android:textColor="@color/yellow"
+            android:fontFamily="@font/tango"
+            android:textSize="44dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:text="Untuk Hidup yang"
+            android:textColor="@color/black"
+            android:fontFamily="@font/tango"
+            android:textSize="44dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="HARMONI"
+            android:textColor="@color/yellow"
+            android:fontFamily="@font/tango"
+            android:textSize="44dp"/>
 
     </LinearLayout>
 
     <Button
         android:id="@+id/scan"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="200dp"
         android:gravity="center"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
-        android:text="SCAN"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="CEK SEKARANG"
+        android:fontFamily="@font/tango"
         android:backgroundTint="@color/yellow"
         android:textColor="@color/black"
-        android:textSize="20dp"
+        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
