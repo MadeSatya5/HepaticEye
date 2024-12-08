@@ -58,9 +58,11 @@
         android:orientation="vertical">
 
         <ImageView
+            android:id="@+id/foto"
             android:layout_width="300dp"
             android:layout_height="400dp"
             android:layout_marginTop="40dp"
+            android:layout_gravity="center"
             android:background="@color/white"/>
 
         <TextView
@@ -76,6 +78,7 @@
             android:id="@+id/persentase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="15%"
             android:fontFamily="@font/tango"
             android:textColor="@color/yellow"
@@ -85,7 +88,7 @@
             android:id="@+id/hasil"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kemungkinan gejala mata Hepatitis"
+            android:text=""
             android:fontFamily="@font/utendo"
             android:textColor="@color/white"
             android:textSize="18dp"
