@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.Theme_HepaticEye);
         setContentView(R.layout.activity_main);
 
         scan = (Button)findViewById(R.id.scan);
