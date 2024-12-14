@@ -50,9 +50,21 @@ public class Result extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        resetResult();
+    }
+
     public static void getResult(String className, double confidence){
         classNameResult = className;
         percentageResult = confidence;
+    }
+
+    public static void resetResult() {
+        classNameResult = null; // Reset to null
+        percentageResult = 0; // Reset to 0
+        uriResult = null; // Reset to null
     }
 
     public static void getUri(String uri){
