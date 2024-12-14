@@ -2,7 +2,7 @@ Final Project Pemrograman Perangkat Bergerak
 
 Dosen : Dr. Dwi Sunaryono, S.Kom., M.Kom.
 
-Repositori ini dibuat untuk memenuhi syarat Final Porject Pemrograman Web.
+Repositori ini dibuat untuk memenuhi syarat Final Project Pemrograman Perangkat Bergerak.
 
 Anggota :
 5053231001 - Made Satya Dhananjaya
