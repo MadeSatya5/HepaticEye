@@ -1,6 +1,7 @@
 package com.example.hepaticeye;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -41,6 +42,14 @@ public class QuizActivity extends AppCompatActivity {
                     return;
                 }
             }
+
+            double quizScore = getQuizScore();
+
+            // Simpan ke SharedPreferences
+            SharedPreferences prefs = getSharedPreferences("HepaticPrefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putFloat("quizScore", (float) quizScore); // simpan sebagai float
+            editor.apply(); // commit perubahan
 
             Intent intent = new Intent(QuizActivity.this, AmbilFoto.class);
             startActivity(intent);
@@ -88,4 +97,26 @@ public class QuizActivity extends AppCompatActivity {
                 findViewById(R.id.q8_ya),
                 findViewById(R.id.q8_tidak));
     }
+
+    private double getQuizScore() {
+        double score = 0;
+
+        // Soal 1
+        if ("Ya".equalsIgnoreCase(answers[0])) score += 1;
+
+        // Soal 2
+        if ("meningkat".equalsIgnoreCase(answers[1])) score += 2;
+        else if (!"tidaktahu".equalsIgnoreCase(answers[1])) score += 1;
+
+        // Soal 3–8
+        for (int i = 2; i < answers.length; i++) {
+            if ("Ya".equalsIgnoreCase(answers[i])) {
+                score += 1;
+            }
+        }
+
+        // Skor maksimal: soal 1 (1) + soal 2 (2) + soal 3–8 (6) = 9
+        return score / 9.0; // normalisasi ke 0.0 – 1.0
+    }
+
 }

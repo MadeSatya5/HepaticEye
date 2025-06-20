@@ -89,7 +89,9 @@ public class AmbilFoto extends AppCompatActivity {
                 imageUri = Uri.fromFile(imageFile);
 
                 Result.getUri(imageUri.toString());
-                Toast.makeText(this, "Image Saved", Toast.LENGTH_SHORT).show();
+
+                // Tampilkan loading
+                setContentView(R.layout.loading);
 
                 new InferenceLocal(this, imageFile.getAbsolutePath()).execute();
             }
