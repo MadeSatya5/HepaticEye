@@ -38,24 +38,6 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity {
 
     Button scan;
-    Button search;
-    static final int REQUEST_IMAGE_CAPTURE = 1;
-    static final int REQUEST_IMAGE_PICK = 2;
-    Uri imageUri;
-
-    private final ActivityResultLauncher<Intent> imageCaptureLauncher =
-            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-                if (result.getResultCode() == RESULT_OK) {
-                    handleCapturedImage(result.getData());
-                }
-            });
-
-    private final ActivityResultLauncher<Intent> imagePickLauncher =
-            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
-                    handleSelectedImage(result.getData().getData());
-                }
-            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,107 +45,15 @@ public class MainActivity extends AppCompatActivity {
         setTheme(R.style.Theme_HepaticEye);
         setContentView(R.layout.activity_main);
 
-
-        // Check permissions if needed
-        checkPermissions();
-
-
         scan = (Button)findViewById(R.id.scan);
-        search = (Button)findViewById(R.id.search);
 
         scan.setOnClickListener(view -> {
-            Intent captureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            imageCaptureLauncher.launch(captureIntent);
+            Intent intent = new Intent(MainActivity.this, QuizActivity.class);
+            startActivity(intent);
         });
 
-        search.setOnClickListener(view -> {
-            Intent pickIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            imagePickLauncher.launch(pickIntent);
-        });
     }
-
-    private void checkPermissions() {
-        // Check for READ_EXTERNAL_STORAGE permission
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1001);
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
-            handleCapturedImage(data);
-        }
-
-        else if(requestCode == REQUEST_IMAGE_PICK && resultCode == RESULT_OK){
-            handleSelectedImage(data.getData());
-        }
-    }
-
-
-    private void handleCapturedImage(Intent data) {
-        Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
-
-        File imageFile = new File(getExternalFilesDir(null), "captured_image.jpg");
-        try (FileOutputStream out = new FileOutputStream(imageFile)) {
-            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
-            imageUri = Uri.fromFile(imageFile);
-
-            Result.getUri(imageUri.toString());
-            Toast.makeText(this, "Image Saved", Toast.LENGTH_SHORT).show();
-
-            new InferenceLocal(this, imageFile.getAbsolutePath()).execute();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Error saving image", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void handleSelectedImage(Uri uri) {
-        if(uri == null){
-            Toast.makeText(this, "Invalid image URI", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        try {
-            // Create a file to save the selected image
-            Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
-            File imageFile = new File(getExternalFilesDir(null), "selected_image.jpg");
-
-            try (FileOutputStream out = new FileOutputStream(imageFile)) {
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
-                imageUri = Uri.fromFile(imageFile);
-
-                Result.getUri(imageUri.toString());
-                Toast.makeText(this, "Image Saved", Toast.LENGTH_SHORT).show();
-
-                new InferenceLocal(this, imageFile.getAbsolutePath()).execute();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Error processing selected image", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 1001) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Permission granted", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-
 }
-
-
 
 class InferenceLocal extends AsyncTask<Void, Void, String> {
 
@@ -277,7 +167,8 @@ class InferenceLocal extends AsyncTask<Void, Void, String> {
                     Result.getResult(className, confidence);
                 }
                 else{
-                    Toast.makeText(context, "No predictions found", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, "No predictions found", Toast.LENGTH_SHORT).show();
+                    System.out.println("No predictions found");
                 }
             }catch (JSONException e){
                 e.printStackTrace();
@@ -289,7 +180,7 @@ class InferenceLocal extends AsyncTask<Void, Void, String> {
         }
         else {
             System.out.println("Error: No response from API");
-            Toast.makeText(context, "Error: No response from API", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, "Error: No response from API", Toast.LENGTH_SHORT).show();
         }
     }
 }
