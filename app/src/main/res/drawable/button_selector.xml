@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- State ketika dipilih -->
+    <item android:drawable="@drawable/button_rounded" android:state_selected="true" />
+    <!-- State default -->
+    <item android:drawable="@drawable/button_border" />
+</selector>
