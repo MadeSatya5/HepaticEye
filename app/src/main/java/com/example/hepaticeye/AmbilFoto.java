@@ -34,18 +34,10 @@ import java.net.URL;
 
 public class AmbilFoto extends AppCompatActivity {
 
-    LinearLayout kamera;   // kamera
-    LinearLayout galeri; // galeri
-    static final int REQUEST_IMAGE_CAPTURE = 1;
+    LinearLayout kamera;
+    LinearLayout galeri;
     static final int REQUEST_IMAGE_PICK = 2;
     Uri imageUri;
-
-    private final ActivityResultLauncher<Intent> imageCaptureLauncher =
-            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-                if (result.getResultCode() == RESULT_OK) {
-                    handleCapturedImage(result.getData());
-                }
-            });
 
     private final ActivityResultLauncher<Intent> imagePickLauncher =
             registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -63,8 +55,8 @@ public class AmbilFoto extends AppCompatActivity {
         galeri = findViewById(R.id.btn_galeri);
 
         kamera.setOnClickListener(view -> {
-            Intent captureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            imageCaptureLauncher.launch(captureIntent);
+            Intent intent = new Intent(AmbilFoto.this, PanduanFoto.class);
+            startActivity(intent);
         });
 
         galeri.setOnClickListener(view -> {
@@ -73,37 +65,12 @@ public class AmbilFoto extends AppCompatActivity {
         });
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK){
-            handleCapturedImage(data);
-        }
-
-        else if(requestCode == REQUEST_IMAGE_PICK && resultCode == RESULT_OK){
+        if(requestCode == REQUEST_IMAGE_PICK && resultCode == RESULT_OK){
             handleSelectedImage(data.getData());
-        }
-    }
-
-    private void handleCapturedImage(Intent data) {
-        Bitmap imageBitmap = (Bitmap) data.getExtras().get("data");
-
-        File imageFile = new File(getExternalFilesDir(null), "captured_image.jpg");
-        try (FileOutputStream out = new FileOutputStream(imageFile)) {
-            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
-            imageUri = Uri.fromFile(imageFile);
-
-            Result.getUri(imageUri.toString());
-//            Toast.makeText(this, "Image Saved", Toast.LENGTH_SHORT).show();
-
-            setContentView(R.layout.loading);
-
-            new InferenceLocal(this, imageFile.getAbsolutePath()).execute();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Error saving image", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -122,7 +89,9 @@ public class AmbilFoto extends AppCompatActivity {
                 imageUri = Uri.fromFile(imageFile);
 
                 Result.getUri(imageUri.toString());
-                Toast.makeText(this, "Image Saved", Toast.LENGTH_SHORT).show();
+
+                // Tampilkan loading
+                setContentView(R.layout.loading);
 
                 new InferenceLocal(this, imageFile.getAbsolutePath()).execute();
             }

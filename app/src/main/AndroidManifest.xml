@@ -30,6 +30,7 @@
         <activity android:name=".QuizActivity" />
         <activity android:name=".AmbilFoto" />
         <activity android:name=".Result" />
+        <activity android:name=".PanduanFoto" />
     </application>
 
 </manifest>

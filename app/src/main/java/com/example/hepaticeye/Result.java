@@ -1,6 +1,7 @@
 package com.example.hepaticeye;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -33,6 +34,14 @@ public class Result extends AppCompatActivity {
         AppCompatButton btnKembali = findViewById(R.id.btn_kembali);
         photo = (ImageView) findViewById(R.id.foto);
 
+        SharedPreferences prefs = getSharedPreferences("HepaticPrefs", MODE_PRIVATE);
+        float quizScore = prefs.getFloat("quizScore", 0.0f); // default 0 jika tidak ada
+
+        double finalScore = (percentageResult * 0.7) + (quizScore * 0.3);
+
+        System.out.println("SCORE QUIZ " + quizScore);
+        System.out.println("FINAL SCORE" + finalScore);
+
         if (uriResult != null) {
             Uri imageUri = Uri.parse(uriResult);
             // Load the image into the ImageView
@@ -43,7 +52,7 @@ public class Result extends AppCompatActivity {
         if (classNameResult != null && percentageResult != 0) {
             if("Jaundiced".equals(classNameResult)){
                 tvClassResult.setText("Silakan lakukan pemeriksaan di klinik kesehatan terdekat atau dokter tepercaya Anda");
-                String formattedResult = String.format("%.2f%%", percentageResult * 100);
+                String formattedResult = String.format("%.2f%%", finalScore * 100);
                 tvpercentage.setText(formattedResult);
                 btnKembali.setText("Kembali ke Halaman Utama");
 
