@@ -10,16 +10,33 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/ambil_foto"
+        android:src="@drawable/panduan_foto"
         android:contentDescription="@null" />
 
+    <!-- Panduan Teks -->
+    <TextView
+        android:id="@+id/tvPanduan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="*Sesuaikan posisi wajah anda seperti pada gambar \n*Pastikan foto dalam pencahayaan yang cukup \n*Pastikan foto terfokus pada wajah"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toTopOf="@id/btn_ambilFoto"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp"/>
+
+
+    <!-- Tombol Ambil Foto -->
     <LinearLayout
         android:id="@+id/btn_ambilFoto"
-        android:layout_marginTop="50dp"
         android:layout_width="110dp"
         android:layout_height="110dp"
-        android:orientation="vertical"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="70dp"
+        android:orientation="vertical"
         android:gravity="center"
         android:padding="16dp"
         android:background="@drawable/button_rounded"
